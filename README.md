@@ -76,7 +76,9 @@ http://localhost:8000/
 
 ### Para receber as notificaçes de E-mail
 
+- Modificar no .env **QUEUE_CONNECTION=database**
 - Execultar no terminal e todos os e-mail serem válidos
+
 
 ```sh 
 $ php artisan queue:work
