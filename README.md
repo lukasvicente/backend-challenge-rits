@@ -68,6 +68,20 @@ Login   | Senha
 ------- | ------
 admin@admin.com | 321
 
+- Para acessar a Aplicação em execução
+
+```sh 
+http://localhost:8000/
+```
+
+### Para receber as notificaçes de E-mail
+
+- Execultar no terminal e todos os e-mail serem válidos
+
+```sh 
+$ php artisan queue:work
+```
+
 ## API RESTFul
  
 ### Criar cliente
