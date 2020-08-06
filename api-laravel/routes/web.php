@@ -17,11 +17,17 @@ Route::get('/', function () {
     return view('vendor.adminlte.auth.login');
 });
 
+Route::get('sendMailPedido', function() {
+    //return new \App\Mail\newEmailPedido();
+    
+});
+Route::get('sendmailpedidocreate', function() {
+    //return new \App\Mail\newEmailPedidoCreate();
+    
+});
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('vendor.adminlte.home');
-})->name('home')->middleware('auth');
+Route::resource('home','HomeController');
 
 Route::resource('users', 'UsersController'); 
 Route::resource('produto', 'ProdutoController'); 

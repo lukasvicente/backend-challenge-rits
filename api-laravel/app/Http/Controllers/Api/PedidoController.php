@@ -87,14 +87,20 @@ class PedidoController extends Controller
             $insert = $this->pedido->create($dateForm);
             
             $pedido_id = $insert->id;
+            $pedido = Pedido::with('cliente')->
+            findOrFail($pedido_id);
 
+            \App\Jobs\newEmailPedidoCreate::dispatch($pedido);
             foreach($produtos as $produto_id){
 
                 $produto  = Produto::find($produto_id);
-                $pedido = Pedido::find($pedido_id)->produto()->attach($produto);
+                $pedidos = Pedido::find($pedido_id)->produto()->attach($produto);
+
 
             }
 
+            
+            
             return response()->json(["created" => $insert],201);
 
         }catch (\Exception $e) {

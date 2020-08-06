@@ -17,7 +17,7 @@ class CreatePedidoHasProdutoTable extends Migration
             $table->id();
             $table->integer('pedido_id')->unsigned();
             $table->integer('produto_id')->unsigned();
-            $table->timestamps();
+             
 
             $table->foreign('pedido_id')
                 ->references('id')

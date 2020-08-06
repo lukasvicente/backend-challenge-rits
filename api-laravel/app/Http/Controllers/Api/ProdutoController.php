@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Cliente;
+use App\Produto;
 
-class ClienteController extends Controller
+class ProdutoController extends Controller
 {
-    private $cliente;
+    private $produto;
 
-    public function __construct(Cliente $cliente)
+    public function __construct(Produto $produto)
     {
-        $this->cliente = $cliente;
+        $this->produto = $produto;
          
     }
 
@@ -21,15 +21,19 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cliente_id = $request->cliente_id;
+        try{
          
-        $pedidos = Cliente::with('pedido')->
-        where('id', $cliente_id)->         
-        get();
-        
-        return response()->json(["Pedidos" => $pedidos]);
+            $produto = Produto::all();
+            
+            return response()->json(["produtos" => $produto]);
+
+        }catch (\Exception $e) {
+
+            return response()->json([$e], 400);
+         
+    }
     }
 
     /**
@@ -40,28 +44,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-
-            $dateForm = $request->all();
-
-            $validate = validator($dateForm, $this->cliente->rules);
-
-            if ($validate->fails()) {
-                
-                return response()->json($validate->Errors(), 400);
-
-            }
-
-            $insert = $this->cliente->create($dateForm);
-
-            return response()->json(["created" => $insert],201);
-
-        }catch (\Exception $e) {
-
-            return response()->json([$e], 400);
-             
-        }
-        
+        //
     }
 
     /**

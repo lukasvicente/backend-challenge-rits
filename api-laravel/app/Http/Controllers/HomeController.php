@@ -1,35 +1,43 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Cliente;
+use App\Pedido;
 
-class ClienteController extends Controller
+class HomeController extends Controller
 {
-    private $cliente;
+    private $pedido;
 
-    public function __construct(Cliente $cliente)
+    public function __construct(Pedido $pedido)
     {
-        $this->cliente = $cliente;
+        $this->pedido = $pedido;
+        $this->middleware('auth');
          
     }
-
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cliente_id = $request->cliente_id;
+        $pedidos = $this->pedido::count();
          
-        $pedidos = Cliente::with('pedido')->
-        where('id', $cliente_id)->         
-        get();
-        
-        return response()->json(["Pedidos" => $pedidos]);
+         
+
+        return view('vendor.adminlte.home', compact('pedidos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -40,28 +48,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-
-            $dateForm = $request->all();
-
-            $validate = validator($dateForm, $this->cliente->rules);
-
-            if ($validate->fails()) {
-                
-                return response()->json($validate->Errors(), 400);
-
-            }
-
-            $insert = $this->cliente->create($dateForm);
-
-            return response()->json(["created" => $insert],201);
-
-        }catch (\Exception $e) {
-
-            return response()->json([$e], 400);
-             
-        }
-        
+        //
     }
 
     /**
@@ -71,6 +58,17 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

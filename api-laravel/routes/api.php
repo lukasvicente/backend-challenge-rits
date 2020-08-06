@@ -25,3 +25,5 @@ Route::get('pedido', 'Api\\PedidoController@index');
 Route::get('cliente/pedido/detail/{id}', 'Api\\PedidoController@show');
 Route::delete('cliente/pedido/delete/{id}', 'Api\\PedidoController@destroy');
 Route::post('cliente/pedido/create', 'Api\\PedidoController@store');
+
+Route::get('produto/list', 'Api\\ProdutoController@index');

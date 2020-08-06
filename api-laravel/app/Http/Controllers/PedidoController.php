@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pedido;
 
+use Illuminate\Support\Facades\Mail;
+
 class PedidoController extends Controller
 {
     private $pedido;
@@ -92,10 +94,19 @@ class PedidoController extends Controller
 
             $update = $this->pedido->findOrFail($id)->update($dateForm);
 
-            if ($update)
+            if ($update){
+
+                $pedido = Pedido::with('cliente')->
+                findOrFail($id);
+
+                \App\Jobs\newEmailPedido::dispatch($pedido);
+                
                 return redirect()->route('pedido.index')->with('success');
-            else
+
+                //return new \App\Mail\newEmailPedido($pedido);
+            }else{
                 return redirect()->route($id,'pedido.edit');
+            }
         } catch (Exception $e) {
             return redirect()->route('pedido.index')->with('error', $e->getMessage());
         }
