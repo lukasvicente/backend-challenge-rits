@@ -56,7 +56,7 @@ $ php artisan migrate
 $ php artisan db:seed
 ```
 
-- Aplicação em execulção
+- Aplicação em execução
 
 ```sh 
 $ php artisan serve
