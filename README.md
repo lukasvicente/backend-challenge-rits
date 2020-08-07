@@ -56,7 +56,7 @@ $ php artisan migrate
 $ php artisan db:seed
 ```
 
-- Aplicação em execulção
+- Aplicação em execução
 
 ```sh 
 $ php artisan serve
@@ -77,12 +77,15 @@ http://localhost:8000/
 ### Para receber as notificaçes de E-mail
 
 - Modificar no .env **QUEUE_CONNECTION=database**
+- Configurar o Ambiente **MAIL** com o servidor de E-mail ou serviço sendgrid
 - Execultar no terminal e todos os e-mail serem válidos
-
 
 ```sh 
 $ php artisan queue:work
+ 
 ```
+
+
 
 ## API RESTFul
  
@@ -293,5 +296,11 @@ Response:
 ```sh 
  "Delete Sucess"
 ```
+## Login
+![login](/assets/login.png)
+## Produto
+![login](/assets/list_produto.png)
+## Pedido
+![login](/assets/list_pedido.png)
 
 
